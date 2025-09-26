@@ -713,7 +713,7 @@ int LJ_FASTCALL lj_tab_isarray(const GCtab *src)
       }
       if (LJ_UNLIKELY(tvisnum(o))) {
         lua_Number n = numberVnum(o);
-        if (LJ_LIKELY(rint((double) n) == n)) {
+        if (LJ_LIKELY(floor((double) n) == n)) {
           continue;
         }
       }

@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include "msinttypes/stdint.h"
 #include "lj_arch.h"
 #include "lj_jit.h"
 #include "lj_vm.h"

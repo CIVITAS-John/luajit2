@@ -17,6 +17,7 @@
 #include "lj_trace.h"
 #include "lj_vm.h"
 #include "lj_strfmt.h"
+#define STATUS_LONGJUMP                  0x80000026L    // winnt
 
 /*
 ** LuaJIT can either use internal or external frame unwinding:

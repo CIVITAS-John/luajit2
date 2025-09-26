@@ -12,6 +12,8 @@
 @rem   static        create static lib to statically link into your project
 @rem   mixed         create static lib to build a DLL in your project
 
+@call "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86
+
 @if not defined INCLUDE goto :FAIL
 
 @setlocal

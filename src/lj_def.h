@@ -38,7 +38,7 @@ typedef unsigned long long uint64_t;
 typedef int intptr_t;
 typedef unsigned int uintptr_t;
 #else
-#include <stdint.h>
+#include "msinttypes/stdint.h"
 #endif
 
 /* Needed everywhere. */

@@ -38,9 +38,9 @@
 
 @setlocal
 @call :SETHOSTVARS
-%LJCOMPILE% host\minilua.c
+%LJCOMPILE% host\minilua.c lj_lock.c
 @if errorlevel 1 goto :BAD
-%LJLINK% /out:minilua.exe minilua.obj
+%LJLINK% /out:minilua.exe minilua.obj lj_lock.obj
 @if errorlevel 1 goto :BAD
 if exist minilua.exe.manifest^
   %LJMT% -manifest minilua.exe.manifest -outputresource:minilua.exe
@@ -112,7 +112,7 @@ buildvm -m folddef -o lj_folddef.h lj_opt_fold.c
 @set LJLINK=%LJLINK% %LJLINKTYPE% %LJLINKTARGET%
 @if "%1"=="amalg" goto :AMALGDLL
 @if "%1"=="static" goto :STATIC
-%LJCOMPILE% %LJDYNBUILD% lj_*.c lib_*.c
+%LJCOMPILE% %LJDYNBUILD% lj_*.c lib_*.c lua
 @if errorlevel 1 goto :BAD
 @if "%1"=="mixed" goto :STATICLIB
 %LJLINK% /DLL /OUT:%LJDLLNAME% lj_*.obj lib_*.obj

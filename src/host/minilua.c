@@ -39,6 +39,7 @@ int _CRT_glob = 0;
 #include <setjmp.h>
 #include <errno.h>
 #include <time.h>
+#include "../lj_lock.h"
 typedef enum{
 TM_INDEX,
 TM_NEWINDEX,
@@ -2368,7 +2369,9 @@ close_state(L);
 L=NULL;
 }
 else
-{}
+{
+luai_userstateopen(L);
+}
 return L;
 }
 static void callallgcTM(lua_State*L,void*ud){

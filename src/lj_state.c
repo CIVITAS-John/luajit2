@@ -29,6 +29,7 @@
 #include "lj_lex.h"
 #include "lj_alloc.h"
 #include "luajit.h"
+#include "lj_lock.h"
 
 /* -- Stack handling ------------------------------------------------------ */
 
@@ -306,6 +307,7 @@ LUA_API lua_State *lua_newstate(lua_Alloc allocf, void *allocd)
   L->status = LUA_OK;
   L->exdata = NULL;
   L->exdata2 = NULL;
+  luai_userstateopen(L);
   return L;
 }
 

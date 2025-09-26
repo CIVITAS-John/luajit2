@@ -25,6 +25,7 @@
 #include "lj_vm.h"
 #include "lj_strscan.h"
 #include "lj_strfmt.h"
+#include "lj_lock.h"
 
 /* -- Common helper functions --------------------------------------------- */
 
@@ -754,10 +755,12 @@ LUA_API int lua_pushthread(lua_State *L)
 LUA_API lua_State *lua_newthread(lua_State *L)
 {
   lua_State *L1;
+  lua_lock(L);
   lj_gc_check(L);
   L1 = lj_state_new(L);
   setthreadV(L, L->top, L1);
   incr_top(L);
+  lua_unlock(L);
   return L1;
 }
 
@@ -1290,6 +1293,7 @@ LUA_API int lua_gc(lua_State *L, int what, int data)
 {
   global_State *g = G(L);
   int res = 0;
+  lua_lock(L);
   switch (what) {
   case LUA_GCSTOP:
     g->gc.threshold = LJ_MAX_MEM;
@@ -1330,6 +1334,7 @@ LUA_API int lua_gc(lua_State *L, int what, int data)
   default:
     res = -1;  /* Invalid option. */
   }
+  lua_unlock(L);
   return res;
 }
 
